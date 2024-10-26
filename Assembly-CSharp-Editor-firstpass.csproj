@@ -217,8 +217,8 @@
     <Compile Include="Assets\Plugins\RealtimeCSG\Editor\Scripts\Control\Managers\CSGSceneManagerInstance.cs" />
     <Compile Include="Assets\Plugins\RealtimeCSG\Editor\Scripts\View\DragAndDrop\SceneDragTool.Meshes.cs" />
     <Compile Include="Assets\Plugins\RealtimeCSG\Editor\Thirdparty\UnityFBXExporter\Editor\ExporterMenu.cs" />
-    <Compile Include="Assets\Plugins\RealtimeCSG\Editor\Scripts\Control\Managers\MeshInstanceManager.Export.cs" />
     <Compile Include="Assets\Plugins\RealtimeCSG\Editor\Scripts\View\Scene\Handles\CSGSlider2D.cs" />
+    <Compile Include="Assets\Plugins\RealtimeCSG\Editor\Scripts\Control\Managers\MeshInstanceManager.Export.cs" />
     <Compile Include="Assets\Plugins\RealtimeCSG\Editor\Scripts\Control\Managers\UpdateLoop.cs" />
     <Compile Include="Assets\Plugins\RealtimeCSG\Editor\Scripts\View\GUI\EditModeGUI\EditModes\Generators\Generator.SpiralStairs.Settings.cs" />
     <Compile Include="Assets\Plugins\RealtimeCSG\Editor\Scripts\View\GUI\ComponentEditorWindows\CSGModelComponent.Inspector.GUIContents.cs" />
