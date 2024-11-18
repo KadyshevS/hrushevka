@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,8 +10,6 @@ public class PlayerController : MonoBehaviour
     CharacterController characterController;
     float xRotation;
     float yRotation;
-    Vector3 velocity;
-
     void Start() {
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
