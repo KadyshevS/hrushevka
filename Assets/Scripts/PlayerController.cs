@@ -1,38 +1,48 @@
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.SocialPlatforms;
 
 public class PlayerController : MonoBehaviour
 {
-    public float sensetivityX;
-    public float sensetivityY;
-    public float moveSpeed;
-    public Camera headCamera;
-    
-    CharacterController characterController;
-    float xRotation;
-    float yRotation;
-    void Start() {
-        characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
+	public Camera headCamera;
+	public float mouseSensetivity;
+	public float maxSpeed;
+	public float acceleration;
+	
+	private CharacterController cc;
+	Vector2 headRotation;
+	Vector3 velocity;
 
-    void Update() {
-        float mouseX = Input.GetAxisRaw("Mouse X") * sensetivityX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * sensetivityY;
+	void Start()
+	{
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+		headRotation.x = transform.localRotation.x;
+		headRotation.y = headCamera.transform.localRotation.y;
+		cc = GetComponent<CharacterController>();
+	}
 
-        yRotation += mouseX;
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+	void Update()
+	{
+		float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * mouseSensetivity;
+		float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * mouseSensetivity;
 
-        transform.rotation = Quaternion.Euler(0f, yRotation, 0f); 
-        headCamera.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
-    }
+		headRotation.x -= mouseY;
+		headRotation.y += mouseX;
+		headRotation.x = Mathf.Clamp(headRotation.x, -90f, 90f);
 
-    void FixedUpdate() {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveZ = Input.GetAxisRaw("Vertical");
-        var moveDir = transform.forward * moveZ + transform.right * moveX;
-        moveDir = moveDir.normalized * moveSpeed * Time.deltaTime;
-        characterController.Move(moveDir);
-    }
+		transform.localRotation = Quaternion.Euler(0.0f, headRotation.y, 0.0f);
+		headCamera.transform.localRotation = Quaternion.Euler(headRotation.x, 0f, 0f);
+	}
+
+	void FixedUpdate()
+	{
+		float vAxis = Input.GetAxisRaw("Vertical");
+		float hAxis = Input.GetAxisRaw("Horizontal");
+
+		velocity.x = Mathf.Lerp(velocity.x, maxSpeed*hAxis, acceleration);
+		velocity.z = Mathf.Lerp(velocity.z, maxSpeed*vAxis, acceleration);
+
+		cc.Move(transform.right * velocity.x + transform.forward * velocity.z);
+	}
 }
