@@ -40,9 +40,16 @@ public class PlayerController : MonoBehaviour
 		float vAxis = Input.GetAxisRaw("Vertical");
 		float hAxis = Input.GetAxisRaw("Horizontal");
 
+		if (!cc.isGrounded) {
+			velocity.y = Mathf.Lerp(velocity.y, -maxSpeed, acceleration);
+		}
+		else {
+			velocity.y = 0.0f;
+		}
+
 		velocity.x = Mathf.Lerp(velocity.x, maxSpeed*hAxis, acceleration);
 		velocity.z = Mathf.Lerp(velocity.z, maxSpeed*vAxis, acceleration);
 
-		cc.Move(transform.right * velocity.x + transform.forward * velocity.z);
+		cc.Move(transform.right * velocity.x + transform.forward * velocity.z + transform.up * velocity.y);
 	}
 }
