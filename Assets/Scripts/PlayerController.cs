@@ -12,8 +12,6 @@ public class PlayerController : MonoBehaviour
 	private CharacterController cc;
 	Vector2 headRotation;
 	Vector3 velocity;
-	
-
 
 	void Start()
 	{
